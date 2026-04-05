@@ -1,34 +1,41 @@
 # Movie Recommendation System 🎬
 
-A Content-Based Movie Recommendation System built using Python, Streamlit, and the TMDB dataset. This application suggests five movies similar to a user-selected title, complete with movie posters fetched via the TMDB API.
+Ek machine learning based web application jo aapki pasandida movie ke basis par top 5 similar movies recommend karti hai. Ismein **Content-Based Filtering** ka use kiya gaya hai aur UI ke liye **Streamlit** ka istemal hua hai.
 
-## 🚀 Features
-- **Smart Recommendations:** Recommends 5 similar movies based on content (genres, keywords, cast, etc.).
-- **Poster Integration:** Fetches and displays real-time movie posters using the TMDB API.
-- **Interactive UI:** Simple and clean web interface built with Streamlit.
-- **Fast Search:** Uses precomputed similarity matrices for instant results.
+## ✨ Features
+*   **User-friendly Interface:** Streamlit ka upyog karke banaya gaya simple clean UI.
+*   **Accurate Recommendations:** Movie metadata ka use karke similar movies find karta hai.
+*   **Dynamic Posters:** TMDB API ka use karke real-time mein movie posters fetch karta hai.
 
 ## 🛠️ Tech Stack
-- **Language:** Python
-- **Web Framework:** Streamlit
-- **Data Analysis:** Pandas, NumPy
-- **Machine Learning:** Scikit-learn (Cosine Similarity)
-- **API:** TMDB (The Movie Database)
-- **Storage:** Pickle (for precomputed similarity matrices and movie data)
+*   **Language:** Python
+*   **Libraries:** Pandas, Scikit-learn, Streamlit, Requests, Pickle
+*   **API:** [The Movie Database (TMDB)](https://themoviedb.org)
 
-## 📂 Project Structure
-- `app.py`: The main Streamlit application script.
-- `movie_dict.pkl`: Pickled dictionary containing movie metadata.
-- `similarity.pkl`: Pickled similarity matrix computed using Content-Based Filtering.
-- `tmdb_5000_movies.csv`: Raw dataset used for training the model.
-- `requirements.txt`: List of dependencies required to run the project.
+## 📁 Project Structure
+```text
+├── app.py                # Main Streamlit application code
+├── movie_dict.pkl        # Processed movie data dictionary
+├── similarity.pkl        # Cosine similarity matrix
+└── README.md             # Project documentation
 
-## ⚙️ How to Run Locally
+## ⚙️ Setup Instruction
 
-Since this project is hosted on GitHub, you can run it on your local machine by following these steps:
-
-1. **Clone the repository:**
+1. **Dependencies Install Karein:**
+   Apne terminal ya command prompt mein niche di gayi command chalaein:
    ```bash
-   git clone https://github.com
-   cd Movie-Recommendation-System
+   pip install streamlit pandas requests
+2. **API Key Setup:**
+   Apni TMDB API Key ko `.streamlit/secrets.toml` file mein is tarah likhein:
+   ```toml
+   TMDB_API_KEY = "aapki_api_key_yahan_daalein"
+3. **App Run Karein:**
+   Project folder mein jaakar terminal mein likhein:
+   ```bash
+   streamlit run app.py
 
+## 🧠 How it Works?
+Jab aap koi movie select karte hain, toh system `similarity.pkl` file ka use karke us movie ke vectors aur baaki movies ke vectors ke beech ka **Cosine Similarity** (distance) nikaalta hai aur sabse kareebi 5 movies ko unke posters ke sath display karta hai.
+
+---
+**Developed by [Afrin Tabassum]**
