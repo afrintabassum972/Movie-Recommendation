@@ -18,7 +18,7 @@ Ek machine learning based web application jo aapki pasandida movie ke basis par 
 ├── movie_dict.pkl        # Processed movie data dictionary
 ├── similarity.pkl        # Cosine similarity matrix
 └── README.md             # Project documentation
-
+```
 ## ⚙️ Setup Instruction
 
 1. **Dependencies Install Karein:**
