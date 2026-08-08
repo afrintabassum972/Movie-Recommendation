@@ -3,10 +3,9 @@ import pickle
 import pandas as pd
 import requests
 import time
-from requests import session
 
 session = requests.session()
-session.headers.update({"user_Agent":"MovieApp/1.0"})
+session.headers.update({"user_Agent": "MovieApp/1.0"})
 
 def fetch_poster(movie_id):
     api_key = st.secrets["TMDB_API_KEY"]
@@ -24,17 +23,16 @@ def fetch_poster(movie_id):
             if poster_path:
                 return "https://image.tmdb.org/t/p/w500/" + poster_path
             else:
-                return "https://via.placeholder.com"
+                return "https://placeholder.com"
         except requests.exceptions.RequestException:
             if attempt < 2:
                 time.sleep(1)
                 continue
-            return "https://via.placeholder.com"
+            return "https://placeholder.com"
 
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
-
     movie_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]
 
     recommended_movies = []
@@ -46,7 +44,6 @@ def recommend(movie):
         recommended_movies_posters.append(fetch_poster(movie_id))
 
     return recommended_movies, recommended_movies_posters
-
 
 movie_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movie_dict)
@@ -62,20 +59,9 @@ selected_movie_name = st.selectbox(
 if st.button('Recommend'):
     names, posters = recommend(selected_movie_name)
 
-    col1, col2, col3, col4, col5 = st.columns(5)
+    cols = st.columns(5)
 
-    with col1:
-        st.text(names[0])
-        st.image(posters[0])
-    with col2:
-        st.text(names[1])
-        st.image(posters[1])
-    with col3:
-        st.text(names[2])
-        st.image(posters[2])
-    with col4:
-        st.text(names[3])
-        st.image(posters[3])
-    with col5:
-        st.text(names[4])
-        st.image(posters[4])
+    for i in range(5):
+        with cols[i]:
+            st.image(posters[i])
+            st.markdown(f"<p style='text-align: center; font-weight: bold;'>{names[i]}</p>", unsafe_allow_html=True)
